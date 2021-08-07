@@ -1,0 +1,1 @@
+https://django-registration-redux.readthedocs.io/en/latest/quickstart.html
