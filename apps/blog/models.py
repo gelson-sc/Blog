@@ -52,7 +52,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(verbose_name='Título', max_length=200, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_posts')
+    categories = models.ManyToManyField(Category)
     slug = models.SlugField(verbose_name='Slug', max_length=200, unique=True)
     author = models.ForeignKey(Account, verbose_name=u"Conta", on_delete=models.CASCADE, related_name='account_posts')
     views = models.IntegerField(verbose_name='Visualizacões', default=0)
@@ -64,6 +64,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    enable_comments = models.BooleanField(verbose_name='Habilitar comentários', default=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
