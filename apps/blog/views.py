@@ -7,7 +7,7 @@ from apps.blog.models import Category, Post
 
 
 def list_of_post(request):
-    object_list = Post.objects.filter(status=1).order_by('-created_on')
+    object_list = Post.objects.filter(status=2).order_by('-created_on')
     paginator = Paginator(object_list, 3)
     page = request.GET.get('page')
     try:
