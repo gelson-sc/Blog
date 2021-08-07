@@ -3,17 +3,11 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-STATUS = (
-    (0, "Inativo"),
-    (1, "Rascunho"),
-    (2, "Publicado")
-)
-RATING_CHOICES = ((1, "★☆☆☆☆"), (2, "★★☆☆☆"), (3, "★★★☆☆"), (4, "★★★★☆"), (5, "★★★★★"),)
-
 
 class Account(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    profile_img = models.ImageField(upload_to='profile-images/%y/%m/%d/', default='profile-images/default.png', blank=False, null=False)
+    profile_img = models.ImageField(upload_to='profile-images/%y/%m/%d/', default='profile-images/default.png',
+                                    blank=False, null=False)
     birth_date = models.DateField(verbose_name='Data de nascimento', null=True, blank=True)
     whatsapp = models.CharField(verbose_name=u"Whatsapp", max_length=25, null=True, blank=True)
     date_updated = models.DateTimeField(verbose_name='Última Atualização', auto_now=True)
@@ -35,8 +29,8 @@ class Account(models.Model):
 class Category(models.Model):
     title = models.CharField(verbose_name='Título', max_length=50, unique=True)
     description = models.TextField(verbose_name='Descricão', null=True, blank=True)
-    slug = models.SlugField(verbose_name='Slug', max_length=50, dunique=True)
-    active = models.IntegerField(verbose_name='Ativo', choices=STATUS, default=0)
+    slug = models.SlugField(verbose_name='Slug', max_length=50, unique=True)
+    active = models.BooleanField(verbose_name='Ativo', default=True)
 
     def __str__(self):
         return self.title
@@ -45,12 +39,20 @@ class Category(models.Model):
         # return reverse('blog:list_of_post_by_category', args=[self.slug])
         return "/categories/%s/" % self.slug
 
-    db_table = 'blog_category'
-    verbose_name_plural = 'Categoria'
-    verbose_name = 'Categorias'
+    class Meta:
+        db_table = 'blog_category'
+        verbose_name_plural = 'Categorias'
+        verbose_name = 'Categoria'
 
 
 class Post(models.Model):
+    STATUS = (
+        (0, "Inativo"),
+        (1, "Rascunho"),
+        (2, "Publicado")
+    )
+    RATING_CHOICES = ((1, "★☆☆☆☆"), (2, "★★☆☆☆"), (3, "★★★☆☆"), (4, "★★★★☆"), (5, "★★★★★"),)
+
     title = models.CharField(verbose_name='Título', max_length=200, unique=True)
     categories = models.ManyToManyField(Category)
     slug = models.SlugField(verbose_name='Slug', max_length=200, unique=True)
@@ -64,7 +66,11 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    enable_comments = models.BooleanField(verbose_name='Habilitar comentários', default=True)
+    enable_comments = models.BooleanField(verbose_name='Habilitar comentários', default=False)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("post_detail", kwargs={"slug": str(self.slug)})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -78,3 +84,20 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
+        verbose_name_plural = 'Comentários'
+        verbose_name = 'Comentário'
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.name)

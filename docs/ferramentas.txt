@@ -1,1 +1,9 @@
 https://django-registration-redux.readthedocs.io/en/latest/quickstart.html
+
+https://django-contrib-comments.readthedocs.io/en/latest/example.html
+
+https://pythonrepo.com/repo/summernote-django-summernote-python-django-utilities
+
+https://djangocentral.com/building-a-blog-application-with-django/
+https://djangocentral.com/integrating-summernote-in-django/
+https://djangocentral.com/creating-comments-system-with-django/
