@@ -54,6 +54,8 @@ class Post(models.Model):
     RATING_CHOICES = ((1, "★☆☆☆☆"), (2, "★★☆☆☆"), (3, "★★★☆☆"), (4, "★★★★☆"), (5, "★★★★★"),)
 
     title = models.CharField(verbose_name='Título', max_length=200, unique=True)
+    image_blog = models.ImageField(upload_to='blog-images/%y/', default='blog-images/default.jpeg',
+                                    blank=False, null=False)
     categories = models.ManyToManyField(Category)
     slug = models.SlugField(verbose_name='Slug', max_length=200, unique=True)
     author = models.ForeignKey(Account, verbose_name=u"Conta", on_delete=models.CASCADE, related_name='account_posts')
