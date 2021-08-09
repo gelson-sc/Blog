@@ -43,6 +43,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.blog.context_processors.get_site_context',
+
             ],
         },
     },
@@ -92,13 +94,13 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SUMMERNOTE_CONFIG = {
-    'iframe': True,
-    'summernote': {
-        'airMode': False,
-        'width': '80%',
-        'height': '480',
-        'lang': None,
-
-    },
-}
+# SUMMERNOTE_CONFIG = {
+#     'iframe': True,
+#     'summernote': {
+#         'airMode': False,
+#         'width': '80%',
+#         'height': '100%',
+#         'lang': None,
+#
+#     },
+# }

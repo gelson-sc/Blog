@@ -36,8 +36,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        # return reverse('blog:list_of_post_by_category', args=[self.slug])
-        return "/categories/%s/" % self.slug
+        return "/category/%s/" % self.slug
 
     class Meta:
         db_table = 'blog_category'

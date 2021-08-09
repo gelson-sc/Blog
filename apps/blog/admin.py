@@ -21,6 +21,9 @@ class PostAdmin(SummernoteModelAdmin):
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('content',)
+    raw_id_fields = ('author',)
+    date_hierarchy = 'created_on'
+    ordering = ('status', 'created_on')
 
 
 class CommentAdmin(admin.ModelAdmin):
