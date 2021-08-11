@@ -7,7 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Blog Template">
-    <meta name="author" content="Gelson santos da SIlva">
+      <meta content="" name="keywords">
+    <meta name="author" content="Gelson santos da Silva">
+        <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}{% endblock %}</title>
+    <meta content="Site de comércio de equipamentos de informática" name="description">
+    <meta content="venda de periféricos computador pc mouse monitor" name="keywords">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+    <link rel="canonical" href="https://visaoblu.com.br/"/>
+    <meta name="description" content="Cursos,supletivo,pós graduação, EAD">
+    <meta name="author" content="sisteech.com">
+    <meta property="og:locale" content="pt_BR"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Home - VisaoBlu"/>
+    <meta property="og:description"
+          content="ESCOLHA SEU CURSO SUPLETIVO Saiba mais SEQUENCIAL Saiba mais PÓS-GRADUAÇÃO Saiba mais"/>
+    <meta property="og:url" content="https://visaoblu.com.br/"/>
+    <meta property="og:site_name" content="VisaoBlu"/>
+    <meta property="og:image" content="https://visaoblu.com.br/site/images/supletivo.jpg"/>
+    <meta name="twitter:card" content="summary_large_image"/>
     <link rel="shortcut icon" href="favicon.ico">
     <!-- FontAwesome JS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -15,88 +35,13 @@
     <link id="theme-style" rel="stylesheet" href="{% static 'blog/css/style.css' %}">
 </head>
 <body>
-<header class="header text-center">
-    <h1 class="blog-name pt-lg-4 mb-0"><a class="no-text-decoration" href="{% url 'home' %}">BLOG</a></h1>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+<header>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation"
-                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div id="navigation" class="collapse navbar-collapse flex-column">
-            <div class="profile-section pt-3 pt-lg-0">
-                <img class="profile-image mb-3 rounded-circle mx-auto" src="{% static 'blog/images/logo.png' %}" alt="image">
-
-                <div class="bio mb-3">Seja bem vindo ao blog.</div>
-                <ul class="social-list list-inline py-3 mx-auto">
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
-                </ul><!--//social-list-->
-                <hr>
-            </div><!--//profile-section-->
-            <h4>Categorias</h4>
-
-            <ul class="navbar-nav flex-column text-start">
-                {% for cat in categories %}
-                    <li class="nav-item">
-                    <a class="nav-link active" href="{{ cat.get_absolute_url }}"><i class="fas fa-home fa-fw me-2"></i>{{ cat.title}}</a>
-                </li>
-                {% endfor %}
-
-
-            </ul>
-
-        </div>
-    </nav>
 </header>
 
-<div class="main-wrapper">
-
-    <section class="cta-section theme-bg-light py-5">
-        <div class="container text-center single-col-max-width">
-            <div class="single-form-max-width pt-3 mx-auto">
-                <form class="signup-form row g-2 g-lg-2 align-items-center">
-                    <div class="col-12 col-md-9">
-                        <label class="sr-only" for="semail">Busca</label>
-                        <input type="email" id="semail" name="semail1" class="form-control me-md-1 semail"
-                               placeholder="Buscar">
-                    </div>
-                    <div class="col-12 col-md-2">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
-                    </div>
-                </form><!--//signup-form-->
-            </div><!--//single-form-max-width-->
-        </div><!--//container-->
-    </section>
-
-
-    <section class="blog-list px-3 py-5 p-md-5">
-        <div class="container single-col-max-width">
-            {% block content %}
-                <!-- Content Goes here -->
-            {% endblock content %}
-
-        </div>
-    </section>
-
-    <footer class="footer text-center py-2 theme-bg-dark">
-
-        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
-                href="https://themes.3rdwavemedia.com" target="_blank">by gelson</a> for developers</small>
-
-    </footer>
-
-</div><!--//main-wrapper-->
-
 <!-- Javascript -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
-
 
 </body>
 </html>
